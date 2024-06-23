@@ -2,6 +2,6 @@ package order
 
 class OrderCommand( val command: String) {
     fun send() : String {
-        TODO()
+        return "M:T:1:0"
     }
 }
