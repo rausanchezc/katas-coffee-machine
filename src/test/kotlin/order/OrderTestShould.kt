@@ -19,4 +19,11 @@ class OrderTestShould {
 
         assertEquals("M:H::", result)
     }
+
+    @Test
+    fun `order a coffee with 2 sugars and a stick`() {
+        val result = OrderCommand("C:2:0").send()
+
+        assertEquals("M:C:2:0", result)
+    }
 }
