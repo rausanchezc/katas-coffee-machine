@@ -2,7 +2,7 @@ package order
 
 class OrderCommand(private val product: String, private val sugar: Int) {
     fun send(): String = when(product.lowercase()) {
-            "coffee" -> "C:2:0"
+            "coffee" -> "C:$sugar:0"
             "tea" -> "T:$sugar:0"
             "chocolate" -> {
                 if(sugar == 0) "H::" else "H:$sugar:0"
