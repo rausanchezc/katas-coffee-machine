@@ -1,28 +1,40 @@
 package order
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
+import java.util.stream.Stream
 import kotlin.test.assertEquals
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class OrderTestShould {
 
-    @Test
-    fun `order a tea with 1 sugar and a stick`() {
+    @ParameterizedTest
+    @MethodSource("teaInputProvider")
+    fun `order a tea`(sugar: Int, expected: String) {
 
-        val result = OrderCommand("T:1:0").send()
+        val result = OrderCommand("Tea", sugar).send()
 
-        assertEquals("M:T:1:0", result)
+        assertEquals(expected, result)
     }
+
+    private fun teaInputProvider() = Stream.of(
+            Arguments.of(1, "M:T:1:0"), // with 1 sugar and a stick
+            Arguments.of(2, "M:T:2:0") // with 2 sugar and a stick
+        )
 
     @Test
     fun `order a chocolate with no sugar - and therefore no stick`() {
-        val result = OrderCommand("H::").send()
+        val result = OrderCommand("Chocolate", 0).send()
 
         assertEquals("M:H::", result)
     }
 
     @Test
     fun `order a coffee with 2 sugars and a stick`() {
-        val result = OrderCommand("C:2:0").send()
+        val result = OrderCommand("Coffee", 2).send()
 
         assertEquals("M:C:2:0", result)
     }

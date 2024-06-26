@@ -1,18 +1,11 @@
 package order
 
-class OrderCommand(private val command: String) {
-    companion object {
-        private val PRODUCTS = setOf("T", "C", "H")
-    }
+class OrderCommand(private val product: String, private val sugar: Int) {
+    fun send(): String = when(product.lowercase()) {
+            "coffee" -> "C:2:0"
+            "tea" -> "T:1:0"
+            "chocolate" -> "H::"
+            else -> throw UnsupportedOperationException()
+        }.also { return "M:$it" }
 
-    fun send(): String {
-
-        val chunks = command.split(":")
-
-        val product = chunks.first()
-
-        if (product !in PRODUCTS) throw UnsupportedOperationException("Unsupported product:$product")
-
-        return "M:$command"
-    }
 }
