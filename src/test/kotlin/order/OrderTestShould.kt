@@ -27,14 +27,15 @@ class OrderTestShould {
 
     @ParameterizedTest
     @MethodSource("chocolateInputProvider")
-    fun `order a chocolate with no sugar - and therefore no stick`(sugar: Int, expected: String) {
+    fun `order a chocolate`(sugar: Int, expected: String) {
         val result = OrderCommand("Chocolate", sugar).send()
 
         assertEquals(expected, result)
     }
 
     private fun chocolateInputProvider() = Stream.of(
-            Arguments.of(0, "M:H::")
+            Arguments.of(0, "M:H::"),
+            Arguments.of(1, "M:H:1:0")
         )
 
 
