@@ -20,7 +20,7 @@ class OrderTestShould {
     }
 
     private fun teaInputProvider() = Stream.of(
-            Arguments.of(1, "M:T::"), // with no sugar and without stick
+            Arguments.of(0, "M:T::"), // with no sugar and without stick
             Arguments.of(1, "M:T:1:0"), // with 1 sugar and a stick
             Arguments.of(2, "M:T:2:0") // with 2 sugar and a stick
         )
@@ -35,13 +35,14 @@ class OrderTestShould {
 
     private fun chocolateInputProvider() = Stream.of(
             Arguments.of(0, "M:H::"), // with no sugar and without stick
-            Arguments.of(1, "M:H:1:0") // with 1 sugar and a stick
+            Arguments.of(1, "M:H:1:0"), // with 1 sugar and a stick
+            Arguments.of(2, "M:H:2:0") // with 1 sugar and a stick
         )
 
 
     @ParameterizedTest
     @MethodSource("coffeeInputProvider")
-    fun `order a coffee with 2 sugars and a stick`(sugar: Int, expected: String) {
+    fun `order a coffee`(sugar: Int, expected: String) {
         val result = OrderCommand("Coffee", sugar).send()
 
         assertEquals(expected, result)
