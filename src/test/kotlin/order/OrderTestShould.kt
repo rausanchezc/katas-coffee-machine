@@ -20,6 +20,7 @@ class OrderTestShould {
     }
 
     private fun teaInputProvider() = Stream.of(
+            Arguments.of(1, "M:T::"), // with no sugar and without stick
             Arguments.of(1, "M:T:1:0"), // with 1 sugar and a stick
             Arguments.of(2, "M:T:2:0") // with 2 sugar and a stick
         )
