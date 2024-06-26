@@ -49,5 +49,6 @@ class OrderTestShould {
     private fun coffeeInputProvider()= Stream.of(
         Arguments.of(2, "M:C:2:0"), // with 2 sugars and a stick
         Arguments.of(1, "M:C:1:0"), // with 1 sugar and a stick
+        Arguments.of(0, "M:C::") // with no sugar and a without stick
     )
 }
