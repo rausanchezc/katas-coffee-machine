@@ -34,8 +34,8 @@ class OrderTestShould {
     }
 
     private fun chocolateInputProvider() = Stream.of(
-            Arguments.of(0, "M:H::"),
-            Arguments.of(1, "M:H:1:0")
+            Arguments.of(0, "M:H::"), // with no sugar and without stick
+            Arguments.of(1, "M:H:1:0") // with 1 sugar and a stick
         )
 
 
