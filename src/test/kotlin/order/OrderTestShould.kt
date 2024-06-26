@@ -1,6 +1,5 @@
 package order
 
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -39,10 +38,15 @@ class OrderTestShould {
         )
 
 
-    @Test
-    fun `order a coffee with 2 sugars and a stick`() {
-        val result = OrderCommand("Coffee", 2).send()
+    @ParameterizedTest
+    @MethodSource("coffeeInputProvider")
+    fun `order a coffee with 2 sugars and a stick`(sugar: Int, expected: String) {
+        val result = OrderCommand("Coffee", sugar).send()
 
-        assertEquals("M:C:2:0", result)
+        assertEquals(expected, result)
     }
+
+    private fun coffeeInputProvider()= Stream.of(
+        Arguments.of(2, "M:C:2:0")
+    )
 }
